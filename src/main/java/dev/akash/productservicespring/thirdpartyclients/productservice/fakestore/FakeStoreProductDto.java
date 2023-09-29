@@ -1,4 +1,4 @@
-package dev.akash.productservicespring.dtos;
+package dev.akash.productservicespring.thirdpartyclients.productservice.fakestore;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,11 @@
 package dev.akash.productservicespring.contollers;
 
+import dev.akash.productservicespring.dtos.ErrorDto;
 import dev.akash.productservicespring.dtos.GenericProductDto;
+import dev.akash.productservicespring.exceptions.NotFoundException;
 import dev.akash.productservicespring.services.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return productService.getProductById(id);
     }
 
@@ -31,12 +35,12 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public GenericProductDto deleteProductById(@PathVariable("id") Long id){
+    public GenericProductDto deleteProductById(@PathVariable("id") Long id) throws NotFoundException{
         return productService.deleteProductById(id);
     }
 
     @PutMapping("/{id}")
-    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto product){
+    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto product) throws NotFoundException{
         return productService.updateProductById(id, product);
     }
 
@@ -50,4 +54,5 @@ public class ProductController {
     public List<String> getAllCategories(){
         return productService.getAllCategories();
     }
+
 }
