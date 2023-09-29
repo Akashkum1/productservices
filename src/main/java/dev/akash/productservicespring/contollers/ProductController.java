@@ -46,7 +46,6 @@ public class ProductController {
 
     @GetMapping("categories/{categoryName}")
     public List<GenericProductDto> getProductsByCategory(@PathVariable("categoryName") String categoryName ){
-        System.out.println(categoryName);
         return productService.getProductsByCategory(categoryName);
     }
 
