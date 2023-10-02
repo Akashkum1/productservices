@@ -1,10 +1,10 @@
 package dev.akash.productservicespring.contollers;
 
 import dev.akash.productservicespring.dtos.GenericProductDto;
+import dev.akash.productservicespring.dtos.ProductDbDto;
 import dev.akash.productservicespring.exceptions.NotFoundException;
 import dev.akash.productservicespring.services.ProductDbService;
-import dev.akash.productservicespring.services.ProductService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,36 +16,36 @@ public class ProductDbController {
 
     private final ProductDbService productDbService;
 
-    public ProductDbController(ProductDbService productDbService){
+    public ProductDbController(@Qualifier("selfProductServiceImpl") ProductDbService productDbService){
         this.productDbService = productDbService;
     }
     @GetMapping
-    public List<GenericProductDto> getAllProducts(){
+    public List<ProductDbDto> getAllProducts(){
         return productDbService.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    public GenericProductDto getProductById(@PathVariable("id") UUID id) throws NotFoundException {
+    public ProductDbDto getProductById(@PathVariable("id") UUID id) throws NotFoundException {
         return productDbService.getProductById(id);
     }
 
     @PostMapping
-    public GenericProductDto createProduct(@RequestBody GenericProductDto product){
+    public ProductDbDto createProduct(@RequestBody ProductDbDto product){
         return productDbService.createProduct(product);
     }
 
     @DeleteMapping("/{id}")
-    public GenericProductDto deleteProductById(@PathVariable("id") UUID id) throws NotFoundException{
+    public ProductDbDto deleteProductById(@PathVariable("id") UUID id) throws NotFoundException{
         return productDbService.deleteProductById(id);
     }
 
     @PutMapping("/{id}")
-    public GenericProductDto updateProductById(@PathVariable("id") UUID id, @RequestBody GenericProductDto product) throws NotFoundException{
+    public ProductDbDto updateProductById(@PathVariable("id") UUID id, @RequestBody ProductDbDto product) throws NotFoundException{
         return productDbService.updateProductById(id, product);
     }
 
     @GetMapping("categories/{categoryName}")
-    public List<GenericProductDto> getProductsByCategory(@PathVariable("categoryName") String categoryName ){
+    public List<ProductDbDto> getProductsByCategory(@PathVariable("categoryName") String categoryName ) throws NotFoundException{
         return productDbService.getProductsByCategory(categoryName);
     }
 

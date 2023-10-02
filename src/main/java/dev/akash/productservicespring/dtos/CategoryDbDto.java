@@ -11,5 +11,4 @@ import java.util.UUID;
 public class CategoryDbDto {
     private UUID id;
     private String name;
-    private List<ProductDbDto> products;
 }

@@ -4,6 +4,7 @@ import dev.akash.productservicespring.dtos.ErrorDto;
 import dev.akash.productservicespring.dtos.GenericProductDto;
 import dev.akash.productservicespring.exceptions.NotFoundException;
 import dev.akash.productservicespring.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService){
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService){
         this.productService = productService;
     }
     @GetMapping
